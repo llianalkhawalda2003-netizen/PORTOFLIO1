@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash for Work - منصة فرص العمل المؤقت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2d6a4f;
+            --secondary-green: #40916c;
+            --light-green: #95d5b2;
+            --accent-gold: #d4a017;
+            --light-gold: #ffd966;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #495057;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--light-gold);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-gold);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* القسم الرئيسي */
+        .hero {
+            background: linear-gradient(rgba(45, 106, 79, 0.85), rgba(45, 106, 79, 0.9)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--light-gold);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* قسم الفئات الوظيفية */
+        .categories {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-green);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .category-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 3rem;
+        }
+        
+        .category-btn {
+            background-color: var(--medium-gray);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-btn:hover {
+            background-color: var(--light-green);
+            color: var(--white);
+        }
+        
+        .category-btn.active {
+            background-color: var(--secondary-green);
+            color: var(--white);
+        }
+        
+        .content-container {
+            display: none;
+        }
+        
+        .content-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* قسم فرص العمل */
+        .jobs {
+            background-color: var(--white);
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .filter-container {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 0;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+        
+        .filter-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        
+        table th {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            text-align: right;
+        }
+        
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        table tr:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-completed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .apply-btn {
+            background-color: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+        
+        .apply-btn:hover {
+            background-color: var(--light-gold);
+            transform: translateY(-2px);
+        }
+        
+        /* قسم التسجيل */
+        .registration-section {
+            padding: 4rem 0;
+        }
+        
+        .registration-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .registration-form {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 3px rgba(149, 213, 178, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .registration-info {
+            padding: 1rem;
+            background-color: var(--light-green);
+            border-radius: 10px;
+            color: var(--primary-green);
+        }
+        
+        .info-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-box h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+        
+        .info-box ul {
+            padding-right: 1.5rem;
+        }
+        
+        .info-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* إحصائيات */
+        .stats-section {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light-gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--light-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-gold);
+            padding-right: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* تخصيصات إضافية */
+        .job-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-left: 10px;
+        }
+        
+        .job-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1rem auto;
+            display: block;
+            box-shadow: var(--shadow);
+        }
+        
+        .category-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .category-text {
+            flex: 1;
+        }
+        
+        .category-visual {
+            flex: 1;
+        }
+        
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .category-content {
+                flex-direction: column;
+            }
+            
+            .category-image {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: var(--primary-green);
+                width: 100%;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: var(--shadow);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .category-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 80%;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .job-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .job-image {
+                margin-left: 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    <h1>Cash for <span>Work</span></h1>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="mainNav">
+                        <li><a href="#" class="active">الرئيسية</a></li>
+                        <li><a href="#jobs">فرص العمل</a></li>
+                        <li><a href="#registration">التسجيل</a></li>
+                        <li><a href="#contact">التواصل</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="container">
+            <h2>منصة فرص العمل المؤقتة</h2>
+            <p>منصة توفر فرص عمل مؤقتة ومشاريع قصيرة الأجل للأفراد الذين فقدوا مصادر دخلهم بسبب الأزمات. نساهم في سد الفجوة المالية وتوفير دخل فوري مع الحفاظ على الكرامة والمهارات.</p>
+            <a href="#registration" class="btn">سجل الآن للعمل</a>
+        </div>
+    </section>
+
+    <!-- إحصائيات -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">1,250+</div>
+                    <div class="stat-label">فرصة عمل مؤقتة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">850+</div>
+                    <div class="stat-label">عامل مسجل</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">75+</div>
+                    <div class="stat-label">مشروع مكتمل</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">رضا العاملين</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الفئات الوظيفية -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">مجالات العمل المتاحة</h2>
+            
+            <div class="category-selector">
+                <button class="category-btn active" data-category="construction">البناء والتشييد</button>
+                <button class="category-btn" data-category="agriculture">الزراعة</button>
+                <button class="category-btn" data-category="services">الخدمات المجتمعية</button>
+            </div>
+            
+            <!-- محتوى البناء والتشييد -->
+            <div id="construction-content" class="content-container active">
+                <div class="category-content">
+                    <div class="category-text">
+                        <h3 style="color: var(--secondary-green); margin-bottom: 1rem;">مجال البناء والتشييد</h3>
+                        <p style="margin-bottom: 1rem;">فرص عمل في مشاريع إعادة الإعمار والإصلاحات المنزلية والتشييد. مناسبة للأفراد ذوي الخبرة في أعمال البناء أو الراغبين في التعلم.</p>
+                        <ul style="padding-right: 1.5rem;">
+                            <li>مساعد بناء - 20$ يومياً</li>
+                            <li>عامل دهان - 18$ يومياً</li>
+                            <li>عامل بلاط - 22$ يومياً</li>
+                            <li>عامل إصلاحات منزلية - 15$ يومياً</li>
+                        </ul>
+                    </div>
+                    <div class="category-visual">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="البناء والتشييد" class="category-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- محتوى الزراعة -->
+            <div id="agriculture-content" class="content-container">
+                <div class="category-content">
+                    <div class="category-text">
+                        <h3 style="color: var(--secondary-green); margin-bottom: 1rem;">مجال الزراعة</h3>
+                        <p style="margin-bottom: 1rem;">فرص عمل في المزارع والحقول الزراعية لتعزيز الأمن الغذائي. مناسبة للأفراد الذين يملكون خبرة في الزراعة أو الراغبين في العمل في الهواء الطلق.</p>
+                        <ul style="padding-right: 1.5rem;">
+                            <li>عامل حصاد - 15$ يومياً</li>
+                            <li>عامل ري - 14$ يومياً</li>
+                            <li>عامل مشتل - 16$ يومياً</li>
+                            <li>عامل تسميد - 13$ يومياً</li>
+                        </ul>
+                    </div>
+                    <div class="category-visual">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="الزراعة" class="category-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- محتوى الخدمات المجتمعية -->
+            <div id="services-content" class="content-container">
+                <div class="category-content">
+                    <div class="category-text">
+                        <h3 style="color: var(--secondary-green); margin-bottom: 1rem;">مجال الخدمات المجتمعية</h3>
+                        <p style="margin-bottom: 1rem;">فرص عمل في خدمات النظافة والتجميل والصحة المجتمعية. مناسبة للرجال والنساء من مختلف الأعمار والمهارات.</p>
+                        <ul style="padding-right: 1.5rem;">
+                            <li>عامل نظافة - 12$ يومياً</li>
+                            <li>عامل تشجير - 13$ يومياً</li>
+                            <li>مساعد صحي - 16$ يومياً</li>
+                            <li>عامل توصيل - 14$ يومياً</li>
+                        </ul>
+                    </div>
+                    <div class="category-visual">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="الخدمات المجتمعية" class="category-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم فرص العمل -->
+    <section id="jobs" class="jobs">
+        <div class="container">
+            <h2 class="section-title">فرص العمل المتاحة</h2>
+            
+            <div class="filter-container">
+                <h3 style="color: var(--primary-green); margin-bottom: 1rem;">فلترة الفرص</h3>
+                <form class="filter-form" id="jobFilter">
+                    <div class="filter-group">
+                        <label for="category">المجال</label>
+                        <select id="category" class="filter-control">
+                            <option value="">جميع المجالات</option>
+                            <option value="construction">البناء والتشييد</option>
+                            <option value="agriculture">الزراعة</option>
+                            <option value="services">الخدمات المجتمعية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="location">الموقع</label>
+                        <select id="location" class="filter-control">
+                            <option value="">جميع المواقع</option>
+                            <option value="north">الشمال</option>
+                            <option value="south">الجنوب</option>
+                            <option value="east">الشرق</option>
+                            <option value="west">الغرب</option>
+                            <option value="center">الوسط</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="status">الحالة</label>
+                        <select id="status" class="filter-control">
+                            <option value="">جميع الحالات</option>
+                            <option value="available">متاح</option>
+                            <option value="completed">مكتمل</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn" id="filterBtn" style="width: 100%;">تطبيق الفلترة</button>
+                    </div>
+                </form>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>الوظيفة</th>
+                        <th>الوصف</th>
+                        <th>المجال</th>
+                        <th>الحالة</th>
+                        <th>التقديم</th>
+                    </tr>
+                </thead>
+                <tbody id="jobsTable">
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>مساعد بناء</span>
+                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="مساعد بناء" class="job-image">
+                            </div>
+                        </td>
+                        <td>مساعد في أعمال البناء والهدم والإصلاحات المنزلية - 6 ساعات يومياً</td>
+                        <td>البناء والتشييد</td>
+                        <td><span class="status-badge status-available">متاح</span></td>
+                        <td><button class="apply-btn"><i class="fas fa-edit"></i> تقديم</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>عامل حصاد</span>
+                                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="عامل حصاد" class="job-image">
+                            </div>
+                        </td>
+                        <td>حصاد المحاصيل الزراعية وتجهيزها للتخزين - 5 ساعات يومياً</td>
+                        <td>الزراعة</td>
+                        <td><span class="status-badge status-available">متاح</span></td>
+                        <td><button class="apply-btn"><i class="fas fa-edit"></i> تقديم</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>عامل نظافة</span>
+                                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="عامل نظافة" class="job-image">
+                            </div>
+                        </td>
+                        <td>تنظيف الشوارع والأماكن العامة - 4 ساعات يومياً</td>
+                        <td>الخدمات المجتمعية</td>
+                        <td><span class="status-badge status-available">متاح</span></td>
+                        <td><button class="apply-btn"><i class="fas fa-edit"></i> تقديم</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>عامل دهان</span>
+                                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="عامل دهان" class="job-image">
+                            </div>
+                        </td>
+                        <td>دهان الجدران والأسقف في المباني السكنية - 6 ساعات يومياً</td>
+                        <td>البناء والتشييد</td>
+                        <td><span class="status-badge status-completed">مكتمل</span></td>
+                        <td><button class="apply-btn" disabled><i class="fas fa-times"></i> مغلق</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>عامل ري</span>
+                                <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="عامل ري" class="job-image">
+                            </div>
+                        </td>
+                        <td>ري المزروعات والعناية بالنباتات - 5 ساعات يومياً</td>
+                        <td>الزراعة</td>
+                        <td><span class="status-badge status-available">متاح</span></td>
+                        <td><button class="apply-btn"><i class="fas fa-edit"></i> تقديم</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="job-row">
+                                <span>مساعد صحي</span>
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                                     alt="مساعد صحي" class="job-image">
+                            </div>
+                        </td>
+                        <td>مساعدة في المراكز الصحية والتوعية المجتمعية - 4 ساعات يومياً</td>
+                        <td>الخدمات المجتمعية</td>
+                        <td><span class="status-badge status-available">متاح</span></td>
+                        <td><button class="apply-btn"><i class="fas fa-edit"></i> تقديم</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- قسم التسجيل -->
+    <section id="registration" class="registration-section">
+        <div class="container">
+            <h2 class="section-title">التسجيل في المنصة</h2>
+            
+            <div class="registration-container">
+                <div class="registration-form">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">نموذج التسجيل</h3>
+                    <form id="registrationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-name">الاسم الكامل *</label>
+                                <input type="text" id="reg-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-phone">رقم الهاتف *</label>
+                                <input type="tel" id="reg-phone" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-email">البريد الإلكتروني</label>
+                            <input type="email" id="reg-email" class="form-control">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-age">العمر *</label>
+                                <input type="number" id="reg-age" class="form-control" min="18" max="65" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-location">موقع السكن *</label>
+                                <select id="reg-location" class="form-control" required>
+                                    <option value="">اختر موقع سكنك</option>
+                                    <option value="north">الشمال</option>
+                                    <option value="south">الجنوب</option>
+                                    <option value="east">الشرق</option>
+                                    <option value="west">الغرب</option>
+                                    <option value="center">الوسط</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-category">المجال المهني المفضل *</label>
+                            <select id="reg-category" class="form-control" required>
+                                <option value="">اختر مجال العمل</option>
+                                <option value="construction">البناء والتشييد</option>
+                                <option value="agriculture">الزراعة</option>
+                                <option value="services">الخدمات المجتمعية</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-experience">الخبرة السابقة (إن وجدت)</label>
+                            <textarea id="reg-experience" class="form-control" placeholder="صف خبرتك السابقة في أي مجال..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reg-availability">تواريخ التفرغ للعمل *</label>
+                            <input type="text" id="reg-availability" class="form-control" placeholder="مثال: من الأحد إلى الخميس، صباحاً" required>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">تسجيل في المنصة</button>
+                    </form>
+                </div>
+                
+                <div class="registration-info">
+                    <div class="info-box">
+                        <h3>شروط التسجيل</h3>
+                        <ul>
+                            <li>أن يكون عمر المتقدم بين 18 و 65 سنة</li>
+                            <li>القدرة على العمل البدني حسب طبيعة الوظيفة</li>
+                            <li>التفرغ للعمل في الأوقات المحددة</li>
+                            <li>الالتزام بمواعيد العمل وساعاته</li>
+                            <li>عدم العمل في وظيفة دائمة أخرى</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>مزايا المنصة</h3>
+                        <ul>
+                            <li>دفع يومي أو أسبوعي نقداً (Cash)</li>
+                            <li>فرص عمل مؤقتة متعددة</li>
+                            <li>تدريب مبدئي حسب الحاجة</li>
+                            <li>تأمين بسيط ضد إصابات العمل</li>
+                            <li>شهادات خبرة للمتميزين</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Cash for Work</h3>
+                    <p>منصة توفر فرص عمل مؤقتة ومشاريع قصيرة الأجل للأفراد المتأثرين بالأزمات. نساهم في تمكين الأفراد اقتصادياً مع الحفاظ على كرامتهم.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#jobs">فرص العمل</a></li>
+                        <li><a href="#registration">التسجيل</a></li>
+                        <li><a href="#contact">التواصل</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>مجالات العمل</h3>
+                    <ul>
+                        <li><a href="#construction">البناء والتشييد</a></li>
+                        <li><a href="#agriculture">الزراعة</a></li>
+                        <li><a href="#services">الخدمات المجتمعية</a></li>
+                        <li><a href="#jobs">جميع الفرص</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات التواصل</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> </li>
+                        <li><i class="fas fa-envelope"></i> info@cashforwork.org</li>
+                        <li><i class="fas fa-map-marker-alt"></i> مكاتب في جميع المناطق</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 ص - 4 م</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Cash for Work. جميع الحقوق محفوظة. | صمم لتمكين الأفراد وبناء المجتمعات</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // التنقل بين فئات العمل
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const contentContainers = document.querySelectorAll('.content-container');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    contentContainers.forEach(container => {
+                        container.classList.remove('active');
+                    });
+                    
+                    const category = this.getAttribute('data-category');
+                    const targetContent = document.getElementById(`${category}-content`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+            
+            // القائمة المتنقلة للهواتف
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('show');
+            });
+            
+            // إغلاق القائمة عند النقر على رابط
+            const navLinks = document.querySelectorAll('#mainNav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('show');
+                });
+            });
+            
+            // فلترة فرص العمل
+            const filterBtn = document.getElementById('filterBtn');
+            const jobsTable = document.getElementById('jobsTable');
+            const jobRows = jobsTable.querySelectorAll('tr');
+            
+            filterBtn.addEventListener('click', function() {
+                const category = document.getElementById('category').value;
+                const location = document.getElementById('location').value;
+                const status = document.getElementById('status').value;
+                
+                jobRows.forEach(row => {
+                    const rowCategory = row.cells[2].textContent;
+                    const rowStatus = row.cells[3].querySelector('.status-badge').textContent;
+                    
+                    let showRow = true;
+                    
+                    if (category && rowCategory !== category) {
+                        showRow = false;
+                    }
+                    
+                    if (status === 'available' && rowStatus !== 'متاح') {
+                        showRow = false;
+                    }
+                    
+                    if (status === 'completed' && rowStatus !== 'مكتمل') {
+                        showRow = false;
+                    }
+                    
+                    row.style.display = showRow ? '' : 'none';
+                });
+            });
+            
+            // نموذج التسجيل
+            const registrationForm = document.getElementById('registrationForm');
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // التحقق من صحة البيانات
+                const name = document.getElementById('reg-name').value;
+                const phone = document.getElementById('reg-phone').value;
+                const age = parseInt(document.getElementById('reg-age').value);
+                
+                if (age < 18 || age > 65) {
+                    alert('يجب أن يكون عمر المتقدم بين 18 و 65 سنة');
+                    return;
+                }
+                
+                if (phone.length < 10) {
+                    alert('يرجى إدخال رقم هاتف صحيح');
+                    return;
+                }
+                
+                // في التطبيق الحقيقي، هنا سيتم إرسال البيانات إلى الخادم
+                alert(`شكراً ${name} لتسجيلك في منصتنا! سنتواصل معك خلال 48 ساعة على الرقم ${phone}`);
+                registrationForm.reset();
+            });
+            
+            // أزرار التقديم للوظائف
+            const applyButtons = document.querySelectorAll('.apply-btn:not([disabled])');
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const jobTitle = this.closest('tr').cells[0].querySelector('span').textContent;
+                    alert(`سيتم توجيهك إلى صفحة التقديم على وظيفة: ${jobTitle}\n\nيرجى التأكد من تسجيلك في المنصة أولاً`);
+                });
+            });
+            
+            // التنقل السلس
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // تأثير التمرير على الهيدر
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
+                } else {
+                    header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
